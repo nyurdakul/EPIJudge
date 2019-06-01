@@ -3,9 +3,19 @@ import epi.test_framework.EpiTest;
 import epi.test_framework.GenericTest;
 public class ReverseBits {
   @EpiTest(testDataFile = "reverse_bits.tsv")
+
+  /*
+    The optimal solution for repeated reversals is to use a lookup table for every 16-bit word.
+   */
+
   public static long reverseBits(long x) {
-    // TODO - you fill in here.
-    return 0;
+    for(int i = 0; i < 32; i++){
+      if(((x >>> i) & 1) != ((x >>> (63 - i)) & 1)){
+        long mask = (1L << i) | (1L << (63 - i));
+        x ^= mask;
+      }
+    }
+    return x;
   }
 
   public static void main(String[] args) {
