@@ -6,9 +6,14 @@ import epi.test_framework.TimedExecutor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 public class OfflineSampling {
   public static void randomSampling(int k, List<Integer> A) {
-    // TODO - you fill in here.
+    Random rand = new Random();
+    for(int i = 0; i < k; i++){
+      int index = rand.nextInt(A.size() - i) + i;
+      Collections.swap(A, i, index);
+    }
     return;
   }
   private static boolean randomSamplingRunner(TimedExecutor executor, int k,
