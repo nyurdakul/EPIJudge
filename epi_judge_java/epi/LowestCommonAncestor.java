@@ -8,7 +8,21 @@ public class LowestCommonAncestor {
   public static BinaryTreeNode<Integer> LCA(BinaryTreeNode<Integer> tree,
                                             BinaryTreeNode<Integer> node0,
                                             BinaryTreeNode<Integer> node1) {
-    // TODO - you fill in here.
+    return findLCA(tree, node0, node1);
+  }
+
+  private static BinaryTreeNode<Integer> findLCA(BinaryTreeNode<Integer> root,
+                                                 BinaryTreeNode<Integer> node0,
+                                                 BinaryTreeNode<Integer> node1) {
+    if(root == null) return null;
+
+    BinaryTreeNode<Integer> left = findLCA(root.left, node0, node1);
+    BinaryTreeNode<Integer> right = findLCA(root.right, node0, node1);
+    if(left != null && right != null) return root;
+    if((left != null || right != null) && (root.equals(node0) || root.equals(node1))) return root;
+    if(left != null) return left;
+    if(right != null) return right;
+    if(root.equals(node0) || root.equals(node1)) return root;
     return null;
   }
   @EpiTest(testDataFile = "lowest_common_ancestor.tsv")
